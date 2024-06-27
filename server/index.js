@@ -37,7 +37,7 @@ app.post("/create", (req, res) => {
             console.log(err);
         }
         else{
-            res.send("Empleado registrado con éxito"); // Si no hay errores, le envío respuesta HTTP al cliente
+            res.send(result); // Si no hay errores, le envío respuesta HTTP al cliente
         }
     });
 });
@@ -75,10 +75,24 @@ app.put("/update", (req, res) => {
             console.log(err);
         }
         else{
-            res.send("Empleado registrado con éxito"); // Si no hay errores, le envío respuesta HTTP al cliente
+            res.send(result); // Si no hay errores, le envío respuesta HTTP al cliente
         }
     });
 });
+
+app.delete("/delete/:id", (req, res) => {
+    const id = req.params.id;
+    db.query("DELETE FROM empleados WHERE id=?",[id],
+    (err, result) => {
+        if (err){
+            console.log(err);
+        }
+        else{
+            res.send(result); // Si no hay errores, le envío respuesta HTTP al cliente
+        }
+    });
+});
+
 
 // Cuando escuche el puerto, quiero hacer esto...
 app.listen(3001, () => {
